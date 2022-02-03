@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>LTC&#39;s Home</title>
+  
+  <subtitle>有心情的话随便写写</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-02-03T07:54:26.828Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>李天成</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一点小感想</title>
+    <link href="http://example.com/2022/02/03/%E4%B8%80%E7%82%B9%E5%B0%8F%E6%84%9F%E6%83%B3/"/>
+    <id>http://example.com/2022/02/03/%E4%B8%80%E7%82%B9%E5%B0%8F%E6%84%9F%E6%83%B3/</id>
+    <published>2022-02-03T04:41:46.000Z</published>
+    <updated>2022-02-03T07:54:26.828Z</updated>
+    
+    <content type="html"><![CDATA[<p>  过年回家聊天的时候受到高人指点，初一晚上本来想做两道oi题，却突然心血来潮想到白天的对话内容，便在b站和知乎上一顿找教程，终于花了三天时间搭出了这个个人博客，一直坐在电脑前找各种问题，腰酸背痛，眼冒金星。其实昨天晚上就想写了，但是不知为何网站成功上线后我第一时间想的不是赶紧写一篇博文而是选择先去调主题（笑）。</p><span id="more"></span><p>  b站和知乎上都说是无坑小白教程怎么怎么样的，看up主演示只要二十多分钟就轻松搭好，但当我实际上手却发现问题层出不穷，比如多打少打一个空格，github抽风式的连不上，字符的编码问题导致乱码，密码当成令牌输等等，感觉我已经把能踩的坑都踩了一遍。找bug的过程实在太难了，我也不知道具体是哪个的问题，有段时间甚至病急乱投医把能试的代码，改的方法都试了一遍，不过倒是奇迹般的修好了（所以我到现在也不知道那个时候问题出在哪）。</p><p>  现在还不是很熟悉这个，不过本来我就没打算太管它，有心情的时候随便写写，今后也慢慢试点花里胡哨的小功能。</p><h3 id="目前打算尝试的功能"><a href="#目前打算尝试的功能" class="headerlink" title="目前打算尝试的功能"></a>目前打算尝试的功能</h3><ul><li>评论区</li><li>打赏通道</li><li>音乐播放器</li><li>鼠标特效</li><li>背景</li><li>页面宠物</li></ul><p>​    我会不定时更新的（指猴年马月），毕竟平时没有多少时间，其他时间还得分给oi和娱乐，这个博客能想起来就随缘更吧。这三天为了博客连oi题都没做，不说了，动态规划太难了，滚去学习了。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;  过年回家聊天的时候受到高人指点，初一晚上本来想做两道oi题，却突然心血来潮想到白天的对话内容，便在b站和知乎上一顿找教程，终于花了三天时间搭出了这个个人博客，一直坐在电脑前找各种问题，腰酸背痛，眼冒金星。其实昨天晚上就想写了，但是不知为何网站成功上线后我第一时间想的不是赶紧写一篇博文而是选择先去调主题（笑）。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="日常" scheme="http://example.com/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
+  
+</feed>
