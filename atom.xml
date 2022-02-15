@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-02-10T09:20:18.894Z</updated>
+  <updated>2022-02-15T10:33:34.923Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,16 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>复制书稿</title>
+    <link href="http://example.com/2022/02/15/%E5%A4%8D%E5%88%B6%E4%B9%A6%E7%A8%BF/"/>
+    <id>http://example.com/2022/02/15/%E5%A4%8D%E5%88%B6%E4%B9%A6%E7%A8%BF/</id>
+    <published>2022-02-15T09:41:25.000Z</published>
+    <updated>2022-02-15T10:33:34.923Z</updated>
+    
+    <content type="html"><![CDATA[<p>​    之前看大佬说要多写题解，帮助自己理清思路，然而我这种蒟蒻做的题都很基础以至于没什么可写的。今天这道dp的复制书稿做了五个多小时，前面推动态规划的时候想到前两天做的一道乘积最大还算顺利，但是后面输出方案的时候就卡住了。题里很关键的一句话就是多解的情况下尽可能的让前面的人少写！！！（我的做法貌似算完以后是最接近平均时间的方案？）第一次写题解，感觉有点语无伦次，不过反正也没人看，看的人也不一定能看懂，就当整理自己思路的学习笔记吧。</p><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>现在要把m本有顺序的书分给k个人复制（抄写），每一个人的抄写速度都一样，一本书不允许给两个（或以上）的人抄写，分给每一个人的书，必须是连续的，比如不能把第一、第三和第四本书给同一个人抄写。</p><p>现在请你设计一种方案，使得复制时间最短。复制时间为抄写页数最多的人用去的时间。k行的起始编号应该从小到大排列，如果有多解，则尽可能让前面的人少抄写。</p><span id="more"></span><h1 id="错误代码（70pts）"><a href="#错误代码（70pts）" class="headerlink" title="错误代码（70pts）"></a>错误代码（70pts）</h1><p>`#include&lt;bits/stdc++.h&gt;<br>using namespace std;<br>int m,k,s[505],dp[505][505],way[505][505],y;<br>struct jg{<br>    int t,w;<br>}ans[505];<br>int main(){<br>    cin&gt;&gt;m&gt;&gt;k;<br>    for(int i=1;i&lt;=m;i++){<br>        cin&gt;&gt;y;<br>        s[i]=s[i-1]+y;<br>    }<br>    memset(dp,127,sizeof(dp));<br>    for(int i=0;i&lt;=k;i++){<br>        dp[i][0]=0;<br>        dp[0][i]=0;<br>    }<br>    for(int i=1;i&lt;=m;i++){<br>        dp[1][i]=s[i];<br>    }<br>    for(int i=2;i&lt;=k;i++){<br>        for(int j=1;j&lt;=m;j++){<br>            for(int h=0;h&lt;=j-1;h++){<br>                if(dp[i][j]&gt;max(s[j]-s[h],dp[i-1][h])){<br>                    dp[i][j]=max(s[j]-s[h],dp[i-1][h]);<br>                    way[i][j]=h;<br>                }<br>            }<br>        }<br>    }<br>    int p=k,q=m;<br>    while(p!=0){<br>        ans[p].w=q;<br>        ans[p].t=way[p][q]+1;<br>        q=way[p][q]; p–;<br>    }for(int i=1;i&lt;=k;i++){<br>        for(int j=0;j&lt;=m;j++){<br>            printf(“%d “,dp[i][j]);<br>        }<br>        cout&lt;&lt;endl;<br>    }<br>    for(int i=1;i&lt;=k;i++){<br>        cout&lt;&lt;ans[i].t&lt;&lt;” “&lt;&lt;ans[i].w&lt;&lt;endl;<br>    }</p><p>}`</p><h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>​    首先因为每个人抄的书是连续的所以就想到了dp（其实是因为这道题在dp的题单里，划掉），我们用dp【i】【j】来表示前i个人抄完前j本书的 时候所用的最小时间。可以想到，当我们推导dp【i】【j】时我们应将dp【i-1】【k】（0&lt;=k&lt;j）也就是i-1个人抄k=0,1,2,3…j本书时所用的时间与第i个人抄写从第k+1到第j本所用的时间对比，二者的最大值即为让i抄k+1到j本书时i人抄j本所用的总时间。再将该方案与现有dp【i】【j】的最优方案对比，取二者的最小值。最终dp【k】【m】即为时间的最小值。</p><p>​    但！！！这道题并不需要我们输出时间，而是询问时间最小时的方案。于是我最开始想到用一个数组way【i】【j】存放dp【i】【j】的来路，但我恰恰被这块卡了一下午。因为局部的最优解不一定是尽可能让前面的人少抄写的方案。例如下面这个例子。</p><p><code>10 4 1 1 1 1 1 1 1 1 1 1</code></p><p>标准输出为</p><p><code>1 1 2 4 5 7 8 10</code></p><p>但我的错误输出为</p><p>1 2</p><p>3 4</p><p>5 7</p><p>8 10</p><p>​    可以看到，当我们让前两个人抄四本书时，最优方案为一人抄两本，时间为2。但当4人抄十本时，因为最大时间一定为3，所以前两人的分配方案为第一人一本，而第二人抄两本。</p><p>​    看别人题解的时候看到一种输出思路，是贪心的想法，因为dp的时候最大工作时间已经确定，所以我们按逆序（这里因为要后面的人尽可能大，所以逆序枚举）给每个人塞书，如果塞完当前这本他的工作量超时，说明他不应该抄这本，便结束他的工作，继续讨论他前一位的情况。如此塞完一圈正是最优解。</p><p>​    感觉这题解有点水，不过我本来只打算理一下思路的。话说我感觉我要发烧了，现在已经开始流鼻涕了。</p><p>​    算法的世界实在是深奥又奇妙，但钻研算法的过程正是其乐趣所在。好吧，这篇就这些。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;​    之前看大佬说要多写题解，帮助自己理清思路，然而我这种蒟蒻做的题都很基础以至于没什么可写的。今天这道dp的复制书稿做了五个多小时，前面推动态规划的时候想到前两天做的一道乘积最大还算顺利，但是后面输出方案的时候就卡住了。题里很关键的一句话就是多解的情况下尽可能的让前面的人少写！！！（我的做法貌似算完以后是最接近平均时间的方案？）第一次写题解，感觉有点语无伦次，不过反正也没人看，看的人也不一定能看懂，就当整理自己思路的学习笔记吧。&lt;/p&gt;
+&lt;h3 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h3&gt;&lt;p&gt;现在要把m本有顺序的书分给k个人复制（抄写），每一个人的抄写速度都一样，一本书不允许给两个（或以上）的人抄写，分给每一个人的书，必须是连续的，比如不能把第一、第三和第四本书给同一个人抄写。&lt;/p&gt;
+&lt;p&gt;现在请你设计一种方案，使得复制时间最短。复制时间为抄写页数最多的人用去的时间。k行的起始编号应该从小到大排列，如果有多解，则尽可能让前面的人少抄写。&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="动态规划" scheme="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
     <title>随缘更新啦</title>
     <link href="http://example.com/2022/02/10/22-2-10/"/>
     <id>http://example.com/2022/02/10/22-2-10/</id>
     <published>2022-02-10T04:15:14.000Z</published>
-    <updated>2022-02-10T09:20:18.894Z</updated>
+    <updated>2022-02-15T10:22:26.150Z</updated>
     
-    <content type="html"><![CDATA[<p>​    不知道我的OI路能走到哪里呢，刚刚看了学长的一篇博客，已经看哭了，<a href="http://blogmb.com/?p=1536%E3%80%82">http://blogmb.com/?p=1536。</a></p><p>​    但愿我能抵住压力撑下去吧，撑到2022年11月份的noip就退役，但愿能如愿以偿的拿到省一。但愿没有什么意外，但愿我就是那个幸运儿。</p><span id="more"></span><p>​    加油！</p><p>​    今天这篇顺便试一下外链音乐播放器这个功能。歌曲的话选了夜鹿（yorushika）的所以我放弃了音乐，也挺适合此刻的心情的。顺便贴一段很喜欢的歌词。</p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1357953768&auto=0&height=66"></iframe><p>だから僕は音楽を辞めた - ヨルシカ (Yorushika)<br>間違ってるんだよ<br>わかってないよ あんたら人間も<br>本当も愛も世界も苦しさも人生も<br>どうでもいいよ<br>正しいかどうか知りたいのだって<br>防衛本能だ<br>考えたんだ あんたのせいだ</p>]]></content>
+    <content type="html"><![CDATA[<p>​    不知道我的OI路能走到哪里呢，刚刚看了学长的一篇博客，十分感动，<a href="http://blogmb.com/?p=1536%E3%80%82">http://blogmb.com/?p=1536。</a></p><p>​    但愿我能抵住压力撑下去吧，撑到2022年11月份的noip就退役，但愿能如愿以偿的拿到省一。但愿没有什么意外，但愿我就是那个幸运儿。</p><span id="more"></span><p>​    加油！</p><p>​    今天这篇顺便试一下外链音乐播放器这个功能。歌曲的话选了夜鹿（yorushika）的所以我放弃了音乐，也挺适合此刻的心情的。顺便贴一段很喜欢的歌词。</p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1357953768&auto=0&height=66"></iframe><p>だから僕は音楽を辞めた - ヨルシカ (Yorushika)<br>間違ってるんだよ<br>わかってないよ あんたら人間も<br>本当も愛も世界も苦しさも人生も<br>どうでもいいよ<br>正しいかどうか知りたいのだって<br>防衛本能だ<br>考えたんだ あんたのせいだ</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;​    不知道我的OI路能走到哪里呢，刚刚看了学长的一篇博客，已经看哭了，&lt;a href=&quot;http://blogmb.com/?p=1536%E3%80%82&quot;&gt;http://blogmb.com/?p=1536。&lt;/a&gt;&lt;/p&gt;
+    <summary type="html">&lt;p&gt;​    不知道我的OI路能走到哪里呢，刚刚看了学长的一篇博客，十分感动，&lt;a href=&quot;http://blogmb.com/?p=1536%E3%80%82&quot;&gt;http://blogmb.com/?p=1536。&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;​    但愿我能抵住压力撑下去吧，撑到2022年11月份的noip就退役，但愿能如愿以偿的拿到省一。但愿没有什么意外，但愿我就是那个幸运儿。&lt;/p&gt;</summary>
     
     
