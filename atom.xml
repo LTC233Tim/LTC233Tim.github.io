@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-03-25T12:38:03.669Z</updated>
+  <updated>2022-08-02T14:09:35.460Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迟到半年的博客</title>
+    <link href="http://example.com/2022/08/02/2022-8-2/"/>
+    <id>http://example.com/2022/08/02/2022-8-2/</id>
+    <published>2022-08-02T13:54:23.000Z</published>
+    <updated>2022-08-02T14:09:35.460Z</updated>
+    
+    <content type="html"><![CDATA[<p>终于把博客迁移过来了！没想到这一拖就是半年，最开始是网课没时间（其实就是玩的太过了，完全把这事置之脑后了），后来五月份又换了电脑，想更新还得迁移一下，快考试了没时间弄了。等到考完试就是oi集训，一下又是两周过去，这两天才匀出时间迁移。（我作业还一点没动呢）</p><span id="more"></span><p>今天随便写写，测试一下，过两天写一个线段树板子题的题解（昨天一天就想他这一道题了，到现在也没完全弄懂）。</p><h1 id="祝每个看到这里的人事事顺心如意！感谢你们的支持！"><a href="#祝每个看到这里的人事事顺心如意！感谢你们的支持！" class="headerlink" title="祝每个看到这里的人事事顺心如意！感谢你们的支持！"></a>祝每个看到这里的人事事顺心如意！感谢你们的支持！</h1>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;终于把博客迁移过来了！没想到这一拖就是半年，最开始是网课没时间（其实就是玩的太过了，完全把这事置之脑后了），后来五月份又换了电脑，想更新还得迁移一下，快考试了没时间弄了。等到考完试就是oi集训，一下又是两周过去，这两天才匀出时间迁移。（我作业还一点没动呢）&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="日常" scheme="http://example.com/tags/%E6%97%A5%E5%B8%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>第一次使用图床</title>
